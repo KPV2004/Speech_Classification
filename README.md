@@ -1,14 +1,18 @@
 # Speech_Classification Setup
 use python virtual environment
-PWD : ..../Speech_Classification/src
+PWD : ..../Speech_Classification
+----------------------------------------
+Make Virtual Environment
+python3 -m venv .venv
 ----------------------------------------
 Activate environment
 window
-  - SpeechClassifly\Scripts\activate.bat
-linux | mac
-  - source SpeechClassifly/bin/activate
+  - .venv\Scripts\python
+Unix/mac
+  - source .venv/bin/activate
 ----------------------------------------
 Deactivate environment
 deactivate
 ----------------------------------------
+Install Lib Requirement
 pip install -r requirements.txt
