@@ -3,6 +3,7 @@ use python virtual environment
 PWD : ..../Speech_Classification
 ----------------------------------------
 #Make Virtual Environment
+
 -python3 -m venv .venv
 ----------------------------------------
 Activate environment
@@ -15,4 +16,5 @@ Deactivate environment
 deactivate
 ----------------------------------------
 #Install Lib Requirement
+
 -pip install -r requirements.txt
