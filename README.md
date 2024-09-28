@@ -14,5 +14,5 @@ Unix/mac
 Deactivate environment
 deactivate
 ----------------------------------------
-Install Lib Requirement
+Install Lib Requirement\n
 pip install -r requirements.txt
