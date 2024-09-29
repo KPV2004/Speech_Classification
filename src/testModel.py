@@ -8,7 +8,7 @@ from torch.utils.data import DataLoader, Dataset
 import torchaudio
 import torchaudio.functional as AF
 import matplotlib.pyplot as plt
-# from torchmetrics import Accuracy
+from torchmetrics import Accuracy
 
 # Define directories for your dataset
 train_data_dir = '../Dataset/Train'
@@ -130,6 +130,63 @@ model = M5()
 optimizer = optim.Adam(model.parameters(), lr=0.0001)
 loss_fn = nn.CrossEntropyLoss()
 
+# Define training and evaluation functions
+# def train_one_epoch(model, train_loader, loss_fn, optimizer):
+#     model.train()
+#     loss_train = AverageMeter()
+#     acc_train = Accuracy(task="multiclass", num_classes=num_class)
+#     for inputs, targets in train_loader:
+#         outputs = model(inputs)
+#         loss = loss_fn(outputs, targets)
+#         loss.backward()
+#         nn.utils.clip_grad_norm_(model.parameters(), 1)
+#         optimizer.step()
+#         optimizer.zero_grad()
+#         loss_train.update(loss.item())
+#         acc_train(torch.argmax(outputs, dim=1), targets.int())
+#     return model, loss_train.avg, acc_train.compute().item()
+
+# def evaluate(model, loader, loss_fn):
+#     model.eval()
+#     loss_valid = AverageMeter()
+#     acc_valid = Accuracy(task="multiclass", num_classes=num_class)
+#     with torch.no_grad():
+#         for inputs, targets in loader:
+#             outputs = model(inputs)
+#             loss = loss_fn(outputs, targets)
+#             loss_valid.update(loss.item())
+#             acc_valid(torch.argmax(outputs, dim=1), targets.int())
+#     return loss_valid.avg, acc_valid.compute().item()
+
+# Training loop
+# num_epochs = 15
+# loss_train_hist, acc_train_hist, loss_test_hist, acc_test_hist = [], [], [], []
+
+# for epoch in range(num_epochs):
+#     model, loss_train, acc_train = train_one_epoch(model, train_loader, loss_fn, optimizer)
+#     loss_test, acc_test = evaluate(model, test_loader, loss_fn)
+    
+#     loss_train_hist.append(loss_train)
+#     acc_train_hist.append(acc_train)
+#     loss_test_hist.append(loss_test)
+#     acc_test_hist.append(acc_test)
+    
+#     print(f'Epoch {epoch+1}/{num_epochs}')
+#     print(f'Train Loss: {loss_train:.4f}, Train Acc: {acc_train:.4f}')
+#     print(f'Test Loss: {loss_test:.4f}, Test Acc: {acc_test:.4f}')
+
+# Save the trained model
+# torch.save(model.state_dict(), 'speech_classification_model.pth')
+
+# Plot accuracy over epochs
+# plt.plot(range(num_epochs), acc_train_hist, 'r-', label='Train')
+# plt.plot(range(num_epochs), acc_test_hist, 'b-', label='Test')
+# plt.xlabel('Epoch')
+# plt.ylabel('Accuracy')
+# plt.grid(True)
+# plt.legend()
+# plt.show()
+
 # Load the trained model
 model = M5()  # Initialize model
 model.load_state_dict(torch.load('speech_classification_model.pth'))  # Load saved weights
@@ -154,8 +211,25 @@ def predict_audio_file(file_path, model, label_map):
     return predicted_label
 
 # Example usage: Predict the label of an audio file
+# for test in os.listdir('../test/'):
+# file_path = '../test/cat.wav'
+# predicted_label = predict_audio_file(file_path, model, label_map)
+# print(f'The predicted label for {file_path} is: {predicted_label}')
+
+score = 0
+title = 0
 for test in os.listdir('../test/'):
+    title += 1
     new_file_path = f'../test/{test}'
     # print(new_file_path)
     predicted_label = predict_audio_file(new_file_path, model, label_map)
-    print(f'The predicted label for {new_file_path} is: {predicted_label}')
+    text = test.split('_')
+    # print(text[0])
+    # print(f'The predicted label for {new_file_path} is: {predicted_label}')
+    print(f'Ans is {text[0]} : Predicted is {predicted_label}',end='')
+    if(text[0].lower() == str(predicted_label).lower()):
+        print(' 1')
+        score = score + 1
+    else:
+        print('')
+print(f'{score}/{title}')
