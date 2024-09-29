@@ -2,3 +2,5 @@ venv/
 Dataset/Train/
 Dataset/Test/
 test/
+old_test/
+SpeechCommands/
