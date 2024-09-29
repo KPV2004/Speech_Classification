@@ -212,7 +212,7 @@ for test in os.listdir('../test/'):
     text = test.split('_')
     # print(text[0])
     # print(f'The predicted label for {new_file_path} is: {predicted_label}')
-    print(f'Ans is {text[0]} : Predicted is {predicted_label}',end='')
+    print(f'Answer is {text[0]} : Predicted is {predicted_label}',end='')
     if(text[0].lower() == str(predicted_label).lower()):
         print(' 1')
         score = score + 1

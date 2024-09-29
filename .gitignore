@@ -1,6 +1,6 @@
 venv/
 Dataset/Train/
-Dataset/Test/
+# Dataset/Test/
 test/
 old_test/
 SpeechCommands/
