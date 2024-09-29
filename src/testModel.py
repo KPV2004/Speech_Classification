@@ -15,9 +15,9 @@ from torchmetrics import Accuracy
 # test_data_dir = '../Dataset/Test'
 
 # Create a dictionary mapping from class label to index
-def create_label_map(directory):
-    labels = sorted([d for d in os.listdir(directory) if os.path.isdir(os.path.join(directory, d))])
-    return {label: idx for idx, label in enumerate(labels)}
+# def create_label_map(directory):
+#     labels = sorted([d for d in os.listdir(directory) if os.path.isdir(os.path.join(directory, d))])
+#     return {label: idx for idx, label in enumerate(labels)}
 
 # label_map = create_label_map(train_data_dir)
 labels = ['sheila', 'right', 'house', 'five', 'left',
