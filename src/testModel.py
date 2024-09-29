@@ -11,15 +11,24 @@ import matplotlib.pyplot as plt
 from torchmetrics import Accuracy
 
 # Define directories for your dataset
-train_data_dir = '../Dataset/Train'
-test_data_dir = '../Dataset/Test'
+# train_data_dir = '../Dataset/Train'
+# test_data_dir = '../Dataset/Test'
 
 # Create a dictionary mapping from class label to index
 def create_label_map(directory):
     labels = sorted([d for d in os.listdir(directory) if os.path.isdir(os.path.join(directory, d))])
     return {label: idx for idx, label in enumerate(labels)}
 
-label_map = create_label_map(train_data_dir)
+# label_map = create_label_map(train_data_dir)
+labels = ['sheila', 'right', 'house', 'five', 'left',
+              'dog', 'visual', 'seven', 'up', 'forward',
+                'marvin', 'go', 'one', 'learn', 'on', 'six',
+                  'off', 'down', 'eight', 'stop', 'zero', 'four',
+                    'nine', 'three', 'backward', 'wow', 'tree', 'bed',
+                      'follow', 'cat', 'happy', 'no', 'two', 'bird', 'yes']
+labels = sorted(labels)
+label_map = {label: idx for idx, label in enumerate(labels)}
+# print(label_map)
 num_class = len(label_map)
 
 # Custom Dataset class for loading audio files
@@ -82,12 +91,12 @@ def collate_fn(batch):
     return data, labels
 
 # Load the dataset
-train_dataset = AudioDataset(train_data_dir, label_map)
-test_dataset = AudioDataset(test_data_dir, label_map)
+# train_dataset = AudioDataset(train_data_dir, label_map)
+# test_dataset = AudioDataset(test_data_dir, label_map)
 
 # Create DataLoader
-train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, collate_fn=collate_fn)
-test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False, collate_fn=collate_fn)
+# train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True, collate_fn=collate_fn)
+# test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False, collate_fn=collate_fn)
 
 # Define the model
 class M5(nn.Module):
