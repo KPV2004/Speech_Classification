@@ -178,15 +178,6 @@ loss_fn = nn.CrossEntropyLoss()
 # Save the trained model
 # torch.save(model.state_dict(), 'speech_classification_model.pth')
 
-# Plot accuracy over epochs
-# plt.plot(range(num_epochs), acc_train_hist, 'r-', label='Train')
-# plt.plot(range(num_epochs), acc_test_hist, 'b-', label='Test')
-# plt.xlabel('Epoch')
-# plt.ylabel('Accuracy')
-# plt.grid(True)
-# plt.legend()
-# plt.show()
-
 # Load the trained model
 model = M5()  # Initialize model
 model.load_state_dict(torch.load('speech_classification_model.pth'))  # Load saved weights
@@ -211,11 +202,6 @@ def predict_audio_file(file_path, model, label_map):
     return predicted_label
 
 # Example usage: Predict the label of an audio file
-# for test in os.listdir('../test/'):
-# file_path = '../test/cat.wav'
-# predicted_label = predict_audio_file(file_path, model, label_map)
-# print(f'The predicted label for {file_path} is: {predicted_label}')
-
 score = 0
 title = 0
 for test in os.listdir('../test/'):
@@ -232,4 +218,4 @@ for test in os.listdir('../test/'):
         score = score + 1
     else:
         print('')
-print(f'{score}/{title}')
+print(f'{score}/{title} = {int((score/title)*100)}%')
